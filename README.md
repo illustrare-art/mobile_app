@@ -1,6 +1,6 @@
 # illustrare
 
-Real artists met with real people.
+A new Flutter application.
 
 ## Getting Started
 
