@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:illustrare/components/BottomBar.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,8 +16,8 @@ class UploadYourImage extends StatefulWidget{
 
 class _UploadYourImageState extends State<UploadYourImage>{
 
-  UploadTask task;
-  File uploadImagePath;
+  UploadTask? task;
+  File? uploadImagePath;
 
   Future<void> selectImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -37,13 +35,13 @@ class _UploadYourImageState extends State<UploadYourImage>{
 
   uploadImage() async {
     if (uploadImagePath != null){
-      var imagePath = uploadImagePath.path;
-      var imageBasename = p.basename(imagePath);
+      String? imagePath = uploadImagePath?.path;
+      var imageBasename = p.basename(imagePath!);
       
       final _storage = FirebaseStorage.instance;
-      var snapshot = await _storage.ref()
+      await _storage.ref()
           .child("asdf/$imageBasename")
-          .putFile(uploadImagePath)
+          .putFile(uploadImagePath!)
           .whenComplete(() => null);
     }
 
@@ -64,7 +62,7 @@ class _UploadYourImageState extends State<UploadYourImage>{
 
                   child:(uploadImagePath != null)
                       ? Image.file(
-                      uploadImagePath,
+                      uploadImagePath!,
                       width:imageWidth,
                       height:imageWidth
                   ) : Placeholder(fallbackHeight: imageWidth,fallbackWidth:imageWidth),

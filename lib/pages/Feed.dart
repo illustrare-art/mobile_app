@@ -15,20 +15,20 @@ class HomePage extends StatelessWidget {
       backgroundColor: Color(0xFF292C6D),
       body: Column(
 
-        children:[
-          Container(
-            margin: EdgeInsets.only(top: screenHeight/10),
-            child: const Text(
+          children:[
+            Container(
+                margin: EdgeInsets.only(top: screenHeight/10),
+                child: const Text(
                     'Collections',
-              textAlign: TextAlign.left,
-              style:TextStyle(
-                color:Color(0xFFFFFFFF),
-                fontSize:48
-              )
-            )
-          ),
-          CollectionCard()
-        ]
+                    textAlign: TextAlign.left,
+                    style:TextStyle(
+                        color:Color(0xFFFFFFFF),
+                        fontSize:48
+                    )
+                )
+            ),
+            CollectionCard()
+          ]
       ),
       bottomNavigationBar: BottomBar(),
     );

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key key}) : super(key: key);
-
+  const LoginPage({Key? key}) : super(key: key);
   static String id = "/LoginPage";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +27,8 @@ class LoginPage extends StatelessWidget {
                 children:[
                   SignInButton(
                     Buttons.Google,
-                    onPressed: () {
-                      Navigator.pushNamed(context,"/HomePage");
+                    onPressed: () async {
+                      Navigator.pushNamed(context,"/InitProfile");
                     },
                   )
                 ]

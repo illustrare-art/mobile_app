@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:illustrare/pages/HomePage.dart';
+import 'package:illustrare/pages/InitProfile.dart';
 import 'package:illustrare/pages/LoginPage.dart';
 import 'package:illustrare/pages/UploadYourImage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,11 +19,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Illustrare',
-      initialRoute: LoginPage.id,
+      initialRoute: InitProfile.id,
       routes: {
         LoginPage.id: (context) => LoginPage(),
         HomePage.id: (context) => HomePage(),
-        UploadYourImage.id: (context) => UploadYourImage()
+        UploadYourImage.id: (context) => UploadYourImage(),
+        InitProfile.id: (context) => InitProfile()
       }
     );
   }
