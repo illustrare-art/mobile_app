@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Illustrare',
-      initialRoute: InitProfile.id,
+      initialRoute: LoginPage.id,
       routes: {
         LoginPage.id: (context) => LoginPage(),
         HomePage.id: (context) => HomePage(),
@@ -29,4 +29,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
 
