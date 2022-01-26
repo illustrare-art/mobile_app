@@ -10,5 +10,7 @@ class BaseResponse {
       : success = json["success"],
         message = json["message"];
 
-  static Future<BaseResponse> withError(String s) {}
+  // BaseResponse.withError(String errorValue)
+  //     : results = List(),
+  //       error = errorValue;
 }

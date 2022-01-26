@@ -18,5 +18,5 @@ class ProductModel {
         ownerId = json["owner_id"],
         currentPrice = json["current_price"];
 
-  ProductModel.withError(String s) {}
+  // ProductModel.withError(String s) {}
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:illustrare/pages/HomePage.dart';
-import 'package:illustrare/createProfile/InitProfile.dart';
+import 'package:illustrare/createProfile/CreateProfileView.dart';
 import 'package:illustrare/auth/LoginPage.dart';
 import 'package:illustrare/pages/UploadYourImage.dart';
 import 'package:firebase_core/firebase_core.dart';
