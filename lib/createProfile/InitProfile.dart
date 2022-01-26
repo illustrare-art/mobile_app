@@ -9,8 +9,6 @@ class InitProfile extends StatefulWidget{
   _InitProfileState createState() => _InitProfileState();
 }
 
-
-
 class _InitProfileState extends State<InitProfile>{
 
 
