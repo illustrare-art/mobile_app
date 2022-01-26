@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:360074203242:android:345d057c1c1fcc9dc0fa13",
+        "mobilesdk_app_id": "1:360074203242:android:11f326f0811e68f1c0fa13",
         "android_client_info": {
-          "package_name": "com.example.illustrare"
+          "package_name": "com.application.illustrare"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "360074203242-j0b59ao4uh6j9320rfmdhqbajerni4sc.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "360074203242-cuv77msbub3mnc2vfsuuk4scsp85370d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.illustrare"
+              }
             }
           ]
         }

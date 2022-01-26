@@ -4,7 +4,7 @@ import 'ProductModel.dart';
 class ProductRepository{
   IllustrareService _service = IllustrareService();
 
-  Future<ProductModel> getProduct(){
-    return _service.getProduct();
+  Future<ProductModel?> getProduct(int productId){
+    return _service.getProduct(productId);
   }
 }
