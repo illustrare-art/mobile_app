@@ -36,4 +36,4 @@ class CreateProfileBloc extends BaseBloc {
   BehaviorSubject<BaseResponse> get subject => _subject;
 
 }
-final bloc = CreateProfileBloc();
+final createProfileBloc = CreateProfileBloc();

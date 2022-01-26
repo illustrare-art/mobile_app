@@ -24,4 +24,4 @@ class ProductBloc extends BaseBloc {
   BehaviorSubject<ProductModel> get subject => _subject;
 
 }
-final bloc = ProductBloc();
+final productBloc = ProductBloc();
