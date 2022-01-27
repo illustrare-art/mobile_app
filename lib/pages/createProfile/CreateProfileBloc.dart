@@ -1,4 +1,6 @@
+import 'package:illustrare/auth/UserManager.dart';
 import 'package:illustrare/components/BaseBloc.dart';
+import 'package:illustrare/models/AppUserModel.dart';
 import '../../models/CreateProfileModel.dart';
 import 'package:illustrare/pages/createProfile/CreateProfileRepository.dart';
 import 'package:illustrare/network/BaseResponse.dart';
@@ -13,20 +15,18 @@ class CreateProfileBloc extends BaseBloc {
   final CreateProfileRepository _repository = CreateProfileRepository();
   final BehaviorSubject<BaseResponse> _subject = BehaviorSubject<BaseResponse>();
 
-  String? userId;
-  String? userName;
-  String? photoUrl;
-  String? phoneNumber;
 
   createProfile() {
-    if (userId != null && userName != null && photoUrl != null && phoneNumber!= null) {
-      var model = CreateProfileModel(userId!, userName!, photoUrl!, phoneNumber!);
-          _createProfile(model);
-    }
+
   }
   _createProfile(CreateProfileModel model) async {
     BaseResponse? response = await _repository.createProfile(model);
     _subject.sink.add(response!);
+  }
+
+  Future<AppUserModel> getUser() async {
+    AppUserModel? user = await UserManager.instance.getUser();
+    return user!;
   }
 
   dispose() {

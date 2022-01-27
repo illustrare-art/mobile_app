@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         LoginPage.id: (context) => LoginPage(),
         HomePage.id: (context) => HomePage(),
         UploadYourImage.id: (context) => UploadYourImage(),
-        InitProfile.id: (context) => InitProfile()
+        CreateProfile.id: (context) => CreateProfile()
       }
     );
   }

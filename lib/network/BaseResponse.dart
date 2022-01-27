@@ -8,7 +8,7 @@ class BaseResponse {
 
   BaseResponse.fromJson(Map<String, dynamic> json)
       : success = json["success"],
-        message = json["message"];
+        message = json["msg"];
 
   // BaseResponse.withError(String errorValue)
   //     : results = List(),

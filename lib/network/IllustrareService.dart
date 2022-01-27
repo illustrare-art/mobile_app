@@ -2,20 +2,14 @@ import '../models/CreateProfileModel.dart';
 import 'package:illustrare/product/ProductModel.dart';
 import 'package:illustrare/network/BaseResponse.dart';
 import 'package:dio/dio.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 class IllustrareService{
-  final String _endpoint = "https://randomuser.me/api/";
-  //final BaseOptions _options = BaseOptions(receiveTimeout: 5000, connectTimeout: 5000);
+  final String _endpoint = "https://us-central1-illustrare-53f71.cloudfunctions.net/api";
   final Dio _dio = Dio();
 
-  Future<ProductModel?> getProduct(int productId) async {
-    try {
-      Response response = await _dio.get(_endpoint + "product/" + productId.toString());
-      return ProductModel.fromJson(response.data);
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-      // return ProductModel.withError("$error");
-    }
+  IllustrareService(){
+
   }
 
   Future<BaseResponse?> createProfile( CreateProfileModel model) async {

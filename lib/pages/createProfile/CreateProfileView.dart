@@ -1,19 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:illustrare/components/BottomBar.dart';
+import 'package:illustrare/models/StreamListenableBuilder.dart';
+import 'package:illustrare/network/BaseResponse.dart';
 import 'package:path/path.dart' as p;
+import "./CreateProfileBloc.dart";
 
-class InitProfile extends StatefulWidget{
+class CreateProfile extends StatefulWidget{
   static String id = "/CreateProfile";
 
   @override
-  _InitProfileState createState() => _InitProfileState();
+  _CreateProfileState createState() => _CreateProfileState();
 }
 
-class _InitProfileState extends State<InitProfile>{
+class _CreateProfileState extends State<CreateProfile>{
 
+  String? photoUrl;
 
   @override
   Widget build(BuildContext context) {
+    return StreamListenableBuilder<BaseResponse>(
+        stream: bloc.subject.stream,
+        listener: (value) {
+          if(value != null){
+          }
+        },
+        builder: (context, AsyncSnapshot<BaseResponse> snapshot) {
+
+          return _buildScreen();
+        });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    bloc
+        .getUser()
+        .then((user) {
+        if(user.photoUrl != null){
+            setState(() {
+              photoUrl = user.photoUrl;
+            });
+        }
+    });
+  }
+
+  Widget _buildScreen() {
     double screenWidth =  MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -27,8 +58,9 @@ class _InitProfileState extends State<InitProfile>{
                 child:Center(
                     child:ClipRRect(
                       borderRadius: BorderRadius.circular(128),
-                      // TODO: backgroundImage GoogleSignIn profil fotoğrafı
-                        child:Image.asset( p .join("assets","images","oguz.png"),width:256,height:256)
+                      // TODO: yerelden yüklenen fotoğrafları handle et.
+                      // Image.network sadece GoogleSignIn ile gelen fotoğrafı kapsıyor.
+                      child:(photoUrl != null)  ? Image.network(photoUrl!,width:256,height:256)  : Placeholder(fallbackHeight: 256,fallbackWidth:256)
             ))),
             Container(
               margin:EdgeInsets.only( top:8),

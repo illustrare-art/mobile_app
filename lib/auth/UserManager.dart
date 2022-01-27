@@ -2,8 +2,12 @@ import 'package:illustrare/models/AppUserModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserManager {
-
+  static UserManager? _instance;
   static AppUserModel? _user;
+
+  UserManager._();
+
+  static UserManager get instance => _instance ??= UserManager._();
 
   Future<void> setUser(AppUserModel user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -11,9 +15,10 @@ class UserManager {
       _user = user;
       prefs.setString("USER_UID",user.userId);
       if(user.userName != null) prefs.setString("USER_USERNAME",user.userName!);
-      if(user.userName != null) prefs.setString("USER_PHOTO_URL",user.photoUrl!);
+      if(user.photoUrl != null) prefs.setString("USER_PHOTO_URL",user.photoUrl!);
       if(user.phoneNumber != null) prefs.setString("USER_PHONE_NUMBER",user.phoneNumber!);
       if(user.emailAddress != null) prefs.setString("USER_EMAIL",user.emailAddress!);
+
     }
   }
 
