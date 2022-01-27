@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage>{
         },
         builder: (context, AsyncSnapshot<AppUserModel> snapshot){
           return _buildNoUser(context);
-    });
+        });
   }
 
 
@@ -41,26 +41,26 @@ class _LoginPageState extends State<LoginPage>{
       backgroundColor: Color(0XFF292C6D),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "ILLUSTRARE",
-                textScaleFactor: .75,
-                style:TextStyle(
-                  color:Color(0XFFFFFFFF),
-                  fontSize:64,
-                  fontWeight:FontWeight.bold,
-                )
+                  "ILLUSTRARE",
+                  textScaleFactor: .75,
+                  style:TextStyle(
+                    color:Color(0XFFFFFFFF),
+                    fontSize:64,
+                    fontWeight:FontWeight.bold,
+                  )
               ),
               Column(
-                children:[
-                  SignInButton(
-                    Buttons.Google,
-                    onPressed: bloc.getUser
+                  children:[
+                    SignInButton(
+                        Buttons.Google,
+                        onPressed: bloc.getUser
 
-                  )
-                ]
+                    )
+                  ]
               ),
 
             ]
