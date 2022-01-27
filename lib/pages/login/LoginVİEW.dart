@@ -16,7 +16,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage>{
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<UserCredential> signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     // Trigger the authentication flow
 
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -29,9 +29,13 @@ class _LoginPageState extends State<LoginPage>{
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    await FirebaseAuth.instance.signInWithCredential(credential);
+    User? user = FirebaseAuth.instance.currentUser;
+    log(user.toString());
+    if (user != null){
+      String uid = user.uid;
+    }
   }
 
   @override

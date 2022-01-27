@@ -1,4 +1,4 @@
-import 'package:illustrare/createProfile/CreateProfileModel.dart';
+import '../models/CreateProfileModel.dart';
 import 'package:illustrare/product/ProductModel.dart';
 import 'package:illustrare/network/BaseResponse.dart';
 import 'package:dio/dio.dart';

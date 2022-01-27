@@ -1,12 +1,12 @@
 import 'package:illustrare/components/BaseBloc.dart';
-import 'package:illustrare/createProfile/CreateProfileModel.dart';
-import 'package:illustrare/createProfile/CreateProfileRepository.dart';
+import '../../models/CreateProfileModel.dart';
+import 'package:illustrare/pages/createProfile/CreateProfileRepository.dart';
 import 'package:illustrare/network/BaseResponse.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CreateProfileBloc extends BaseBloc {
 
-  CreateProfileBlo() {
+  CreateProfileBloc() {
     this.authRequired = true;
   }
 
@@ -21,7 +21,7 @@ class CreateProfileBloc extends BaseBloc {
   createProfile() {
     if (userId != null && userName != null && photoUrl != null && phoneNumber!= null) {
       var model = CreateProfileModel(userId!, userName!, photoUrl!, phoneNumber!);
-          _createProfile(model)
+          _createProfile(model);
     }
   }
   _createProfile(CreateProfileModel model) async {
@@ -36,4 +36,4 @@ class CreateProfileBloc extends BaseBloc {
   BehaviorSubject<BaseResponse> get subject => _subject;
 
 }
-final bloc = CreateProfileBloc()
+final bloc = CreateProfileBloc();

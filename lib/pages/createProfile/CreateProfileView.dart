@@ -3,7 +3,7 @@ import 'package:illustrare/components/BottomBar.dart';
 import 'package:path/path.dart' as p;
 
 class InitProfile extends StatefulWidget{
-  static String id = "/InitProfile";
+  static String id = "/CreateProfile";
 
   @override
   _InitProfileState createState() => _InitProfileState();

@@ -1,6 +1,6 @@
-import 'package:illustrare/createProfile/CreateProfileModel.dart';
-import 'package:illustrare/network/BaseResponse.dart';
-import 'package:illustrare/network/IllustrareService.dart';
+import '../../models/CreateProfileModel.dart';
+import '../../network/BaseResponse.dart';
+import '../../network/IllustrareService.dart';
 
 class CreateProfileRepository{
   IllustrareService _service = IllustrareService();
