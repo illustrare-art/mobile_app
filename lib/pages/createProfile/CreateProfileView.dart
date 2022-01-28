@@ -1,9 +1,9 @@
 import 'dart:developer';
+import 'package:illustrare/models/CreateProfileModel.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:illustrare/components/BottomBar.dart';
-import 'package:illustrare/models/CreateProfileModel.dart';
 import 'package:illustrare/models/StreamListenableBuilder.dart';
 import 'package:illustrare/network/BaseResponse.dart';
 import "./CreateProfileBloc.dart";
@@ -20,6 +20,7 @@ class _CreateProfileState extends State<CreateProfile>{
   String? photoUrl;
   final usernameController = TextEditingController();
   final phoneNumberController = TextEditingController();
+  String? errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,9 @@ class _CreateProfileState extends State<CreateProfile>{
         listener: (value) {
           if(value != null){
             if(value.success){
-              Navigator.popAndPushNamed(context, "/Feed")
+              Navigator.popAndPushNamed(context, "/Feed");
+            }else{
+              // TODO: Handle Error
             }
           }
         },
@@ -109,7 +112,7 @@ class _CreateProfileState extends State<CreateProfile>{
                   onPressed: () async {
                     var username = usernameController.text;
                     if(!_CreateProfileState.isUsernameValid(username)){
-                      // TODO: side effect
+                      // TODO: side effect : Handle Error
                     }else{
                       await bloc.createProfile(CreateProfileModel(usernameController.text, phoneNumberController.text));
                     }
@@ -125,12 +128,10 @@ class _CreateProfileState extends State<CreateProfile>{
                     "Start",
                     style: TextStyle(fontSize:32,color:Colors.white)
               ))
+
             )
-          ]
-      ),
 
-
-    );
+    ]));
   }
 
 }

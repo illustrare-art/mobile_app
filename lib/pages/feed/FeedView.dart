@@ -13,6 +13,14 @@ class FeedView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Color(0xFF292C6D),
+      floatingActionButton: FloatingActionButton(
+      elevation: 4.0,
+      backgroundColor: Color(0xFF00C89B),
+      child:Icon(Icons.add,color:Color(0xFFF4ECFF) ),
+      onPressed: () {},
+      ),
+      floatingActionButtonLocation:
+      FloatingActionButtonLocation.centerDocked,
       body: Column(
 
           children:[
