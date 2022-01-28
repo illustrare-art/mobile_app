@@ -8,7 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(name:"illustrare-53f71");
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

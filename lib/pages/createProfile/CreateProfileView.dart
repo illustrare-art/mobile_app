@@ -28,7 +28,7 @@ class _CreateProfileState extends State<CreateProfile>{
         listener: (value) {
           if(value != null){
             if(value.success){
-              Navigator.pushNamed(context,"/Feed");
+              Navigator.popAndPushNamed(context, "/Feed")
             }
           }
         },
@@ -52,6 +52,11 @@ class _CreateProfileState extends State<CreateProfile>{
     });
   }
 
+  static bool isUsernameValid(String username){
+    // TODO: Implement the rules.
+    return true;
+  }
+
   Widget _buildScreen(String? errorMessage) {
     double screenWidth =  MediaQuery.of(context).size.width;
 
@@ -66,20 +71,19 @@ class _CreateProfileState extends State<CreateProfile>{
                 child:Center(
                     child:ClipRRect(
                       borderRadius: BorderRadius.circular(128),
-                      // TODO: Yerelden yüklenen fotoğrafları handle et.
-                      // Image.network sadece GoogleSignIn ile gelen fotoğrafı kapsıyor.
-                      // TODO:
-                      child:(photoUrl != null)  ? Image.network(photoUrl!,width:256,height:256)  : Placeholder(fallbackHeight: 256,fallbackWidth:256)
+                      child:(photoUrl != null)  ? Image.network(photoUrl!,width:256,height:256,fit: BoxFit.cover)  : Placeholder(fallbackHeight: 256,fallbackWidth:256)
             ))),
             Container(
-              margin:EdgeInsets.only( top:8),
-
+              margin:EdgeInsets.only( top:16),
               child: RichText(
                 text:TextSpan(
+                  // TODO: Resimleri nasıl handle edeceğiz.
+                  // -> Signin'den gelen resimleri ve yerelden yüklenen resimleri nasıl handle edeceğiz?
+                  // -> @bilgeeren ile bir standart belirle.
                   text:"Edit Your Profile Photo",
                   style:TextStyle(color:Color(0xFF00C89B),fontSize:16,fontWeight: FontWeight.w700),
                   recognizer:TapGestureRecognizer()
-                    ..onTap = (){}
+                    ..onTap = (){log("ALTUNIZADE");}
             ))),
             Container(
                 margin:EdgeInsets.only( top:48),
@@ -103,7 +107,12 @@ class _CreateProfileState extends State<CreateProfile>{
 
               child:TextButton(
                   onPressed: () async {
-                    await bloc.createProfile(CreateProfileModel(usernameController.text, phoneNumberController.text));
+                    var username = usernameController.text;
+                    if(!_CreateProfileState.isUsernameValid(username)){
+                      // TODO: side effect
+                    }else{
+                      await bloc.createProfile(CreateProfileModel(usernameController.text, phoneNumberController.text));
+                    }
                   },
                   style:TextButton.styleFrom(
                     backgroundColor: Color(0xFF00C89B),
@@ -120,7 +129,6 @@ class _CreateProfileState extends State<CreateProfile>{
           ]
       ),
 
-      bottomNavigationBar: BottomBar(),
 
     );
   }
