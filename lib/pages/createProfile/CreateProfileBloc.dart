@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:illustrare/auth/UserManager.dart';
 import 'package:illustrare/components/BaseBloc.dart';
 import 'package:illustrare/models/AppUserModel.dart';
@@ -16,12 +18,9 @@ class CreateProfileBloc extends BaseBloc {
   final BehaviorSubject<BaseResponse> _subject = BehaviorSubject<BaseResponse>();
 
 
-  createProfile() {
-
-  }
-  _createProfile(CreateProfileModel model) async {
+  createProfile(CreateProfileModel model) async {
     BaseResponse? response = await _repository.createProfile(model);
-    _subject.sink.add(response!);
+    _subject.sink.add(response);
   }
 
   Future<AppUserModel> getUser() async {

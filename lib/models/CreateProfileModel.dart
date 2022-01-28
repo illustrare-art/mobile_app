@@ -1,18 +1,14 @@
 import 'dart:ffi';
 
 class CreateProfileModel {
-  String userId;
-  String userName;
-  String photoUrl;
+  String username;
   String phoneNumber;
 
-  CreateProfileModel(this.userId, this.userName, this.photoUrl, this.phoneNumber);
+  CreateProfileModel(this.username,  this.phoneNumber);
 
   Map<String, dynamic> toJson(){
     return <String, dynamic> {
-      'user_id': userId,
-      'username': userName,
-      'profile_photo': photoUrl,
+      'username': username,
       'phone_number': phoneNumber,
     };
   }

@@ -1,8 +1,11 @@
+import 'dart:developer';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:illustrare/components/BottomBar.dart';
+import 'package:illustrare/models/CreateProfileModel.dart';
 import 'package:illustrare/models/StreamListenableBuilder.dart';
 import 'package:illustrare/network/BaseResponse.dart';
-import 'package:path/path.dart' as p;
 import "./CreateProfileBloc.dart";
 
 class CreateProfile extends StatefulWidget{
@@ -15,6 +18,8 @@ class CreateProfile extends StatefulWidget{
 class _CreateProfileState extends State<CreateProfile>{
 
   String? photoUrl;
+  final usernameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +27,14 @@ class _CreateProfileState extends State<CreateProfile>{
         stream: bloc.subject.stream,
         listener: (value) {
           if(value != null){
+            if(value.success){
+              Navigator.pushNamed(context,"/Feed");
+            }
           }
         },
         builder: (context, AsyncSnapshot<BaseResponse> snapshot) {
-
-          return _buildScreen();
+          if(snapshot.data != null) return _buildScreen(snapshot.data!.message);
+          else return _buildScreen(null);
         });
   }
 
@@ -44,7 +52,7 @@ class _CreateProfileState extends State<CreateProfile>{
     });
   }
 
-  Widget _buildScreen() {
+  Widget _buildScreen(String? errorMessage) {
     double screenWidth =  MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -58,20 +66,28 @@ class _CreateProfileState extends State<CreateProfile>{
                 child:Center(
                     child:ClipRRect(
                       borderRadius: BorderRadius.circular(128),
-                      // TODO: yerelden yüklenen fotoğrafları handle et.
+                      // TODO: Yerelden yüklenen fotoğrafları handle et.
                       // Image.network sadece GoogleSignIn ile gelen fotoğrafı kapsıyor.
+                      // TODO:
                       child:(photoUrl != null)  ? Image.network(photoUrl!,width:256,height:256)  : Placeholder(fallbackHeight: 256,fallbackWidth:256)
             ))),
             Container(
               margin:EdgeInsets.only( top:8),
 
-              child:Text("Edit Your Profile Photo",style:TextStyle(color:Color(0xFF00C89B),fontSize:16,fontWeight: FontWeight.w700))
-            ),
+              child: RichText(
+                text:TextSpan(
+                  text:"Edit Your Profile Photo",
+                  style:TextStyle(color:Color(0xFF00C89B),fontSize:16,fontWeight: FontWeight.w700),
+                  recognizer:TapGestureRecognizer()
+                    ..onTap = (){}
+            ))),
             Container(
                 margin:EdgeInsets.only( top:48),
                 width:screenWidth*.9,
               child:TextField(
                 decoration: InputDecoration(labelText: 'Username'),
+                controller: usernameController,
+
               )
             ),
             Container(
@@ -79,13 +95,16 @@ class _CreateProfileState extends State<CreateProfile>{
                 width:screenWidth*.9,
                 child:TextField(
                   decoration: InputDecoration(labelText: 'Phone Number'),
+                  controller: phoneNumberController,
                 )
             ),
             Container(
                 margin:EdgeInsets.only( top:32),
 
               child:TextButton(
-                  onPressed: () { Navigator.pushNamed(context, "/HomePage"); },
+                  onPressed: () async {
+                    await bloc.createProfile(CreateProfileModel(usernameController.text, phoneNumberController.text));
+                  },
                   style:TextButton.styleFrom(
                     backgroundColor: Color(0xFF00C89B),
                     padding: EdgeInsets.symmetric(horizontal: 32, vertical: 8),

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:illustrare/components/BottomBar.dart';
 import 'package:illustrare/components/CollectionCard.dart';
 
-class HomePage extends StatelessWidget {
-  static String id = "/HomePage";
+class FeedView extends StatelessWidget {
+  static String id = "/Feed";
 
-  const HomePage({Key? key}) : super(key: key);
+  const FeedView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

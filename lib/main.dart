@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:illustrare/pages/HomePage.dart';
 import 'package:illustrare/pages/createProfile/CreateProfileView.dart';
+import 'package:illustrare/pages/feed/FeedView.dart';
 import 'pages/login/LoginView.dart';
 import 'package:illustrare/pages/UploadYourImage.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(name:"illustrare-53f71");
   runApp(MyApp());
 }
 
@@ -22,9 +23,9 @@ class MyApp extends StatelessWidget {
       initialRoute: LoginPage.id,
       routes: {
         LoginPage.id: (context) => LoginPage(),
-        HomePage.id: (context) => HomePage(),
         UploadYourImage.id: (context) => UploadYourImage(),
-        CreateProfile.id: (context) => CreateProfile()
+        CreateProfile.id: (context) => CreateProfile(),
+        FeedView.id : (context) => FeedView()
       }
     );
   }

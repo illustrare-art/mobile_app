@@ -7,8 +7,9 @@ import '../../network/IllustrareService.dart';
 class CreateProfileRepository{
   IllustrareService _service = IllustrareService();
 
-  Future<BaseResponse?> createProfile(CreateProfileModel model){
+  Future<BaseResponse> createProfile(CreateProfileModel model){
     return _service.createProfile(model);
+
   }
 
 }
