@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:illustrare/auth/TokenManager.dart';
 import 'package:illustrare/auth/UserManager.dart';
 import 'package:illustrare/models/AppUserModel.dart';
 import 'package:illustrare/models/TokenModel.dart';
@@ -26,7 +27,10 @@ class LoginRepository{
 
     var model = TokenModel(credential.accessToken!);
     var response = await _illustrareService.login(model);
-    log(response.toString());
-    if(response.success) return model;
+
+    if(response.success){
+      TokenManager.instance.setToken(model);
+      return model;
+    }
   }
 }

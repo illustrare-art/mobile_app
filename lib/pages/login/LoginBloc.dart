@@ -1,6 +1,7 @@
 
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:illustrare/auth/TokenManager.dart';
 import 'package:illustrare/auth/UserManager.dart';
 import 'package:illustrare/models/AppUserModel.dart';
@@ -20,7 +21,6 @@ class LoginBloc {
   login() async{
 
     var model = await _repository.login();
-
     if(model != null) getUser();
   }
 
