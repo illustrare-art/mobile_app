@@ -1,4 +1,7 @@
 
+import 'dart:developer';
+
+import 'package:illustrare/auth/TokenManager.dart';
 import 'package:illustrare/auth/UserManager.dart';
 import 'package:illustrare/models/AppUserModel.dart';
 import 'package:illustrare/pages/login/LoginRepository.dart';
@@ -10,21 +13,19 @@ class LoginBloc {
   final BehaviorSubject<AppUserModel> _subject = BehaviorSubject<AppUserModel>();
 
   getUser() async {
-    if(await UserManager.instance.isLoggedIn()){
-      AppUserModel? user = await UserManager.instance.getUser();
-      _subject.sink.add(user!);
-    }else{
-      AppUserModel? response = await _repository.getUser();
-      if(response != null){
-        UserManager.instance.setUser(response);
-        _subject.sink.add(response);
-      }
-    }
-
+    AppUserModel? user = await UserManager.instance.getUser();
+    _subject.sink.add(user!);
   }
 
-  Future<bool> isLoggedIn() async{
-    return await UserManager.instance.isLoggedIn();
+  login() async{
+    log(TokenManager.instance.getToken().toString());
+
+    var model = await _repository.login();
+    if(model != null) getUser();
+  }
+
+  bool isLoggedIn(){
+    return TokenManager.instance.isLoggedIn();
   }
 
   dispose(){

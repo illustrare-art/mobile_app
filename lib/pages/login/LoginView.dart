@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:illustrare/auth/UserManager.dart';
 import 'package:illustrare/models/AppUserModel.dart';
 import 'package:illustrare/models/StreamListenableBuilder.dart';
 import 'package:illustrare/pages/login/LoginBloc.dart';
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage>{
     return StreamListenableBuilder<AppUserModel>(
         stream: bloc.subject.stream,
         listener: (value) {
-          this.redirect(value);
+          if(bloc.isLoggedIn())  this.redirect(value);
 
         },
         builder: (context, AsyncSnapshot<AppUserModel> snapshot){
@@ -46,7 +47,7 @@ class _LoginPageState extends State<LoginPage>{
   initState() {
     super.initState();
     Future.microtask(() async  {
-      if(await bloc.isLoggedIn()) await bloc.getUser();
+      if(bloc.isLoggedIn()) this.redirect(await UserManager.instance.getUser());
 
     });
   }
@@ -72,7 +73,7 @@ class _LoginPageState extends State<LoginPage>{
                   children:[
                     SignInButton(
                         Buttons.Google,
-                        onPressed: bloc.getUser
+                        onPressed: bloc.login
                     )
                   ]
               ),
