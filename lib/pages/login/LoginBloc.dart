@@ -18,9 +18,9 @@ class LoginBloc {
   }
 
   login() async{
-    log(TokenManager.instance.getToken().toString());
 
     var model = await _repository.login();
+
     if(model != null) getUser();
   }
 

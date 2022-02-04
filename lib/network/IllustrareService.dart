@@ -7,16 +7,16 @@ import 'package:illustrare/models/TokenModel.dart';
 import '../models/CreateProfileModel.dart';
 import 'package:illustrare/network/BaseResponse.dart';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 class IllustrareService{
-  // Todo change parameters on deployment.
-  final String _host = "localhost";
+  // TODO: change parameters on deployment.
+  final String _host = "http://c46c-24-133-86-35.ngrok.io";
 
   final Dio _dio = Dio(BaseOptions(headers: {
-    "Content-Type":"application/json",
     'Connection': 'keep-alive',
     'Accept': "*/*",
-
+    "Content-Type":"application/json"
   }));
 
 
@@ -31,14 +31,13 @@ class IllustrareService{
   Future<BaseResponse> login(TokenModel model) async{
     /// Uri.http("example.org", "/path", { "q" : "dart" });
     // TODO: Update the code below on production.
-    var uri = Uri(
-      scheme: "http",
-      host:"localhost",
-      port:8000,
-      pathSegments: <String>["api","auth","login","google"],
-      queryParameters:model.toJson()
-    );
-    log(uri.toString());
+    // var uri = Uri(
+    //     //   scheme: "http",
+    //     //   host:"localhost",
+    //     //   pathSegments: <String>["api","auth","login","google"],
+    //     //   queryParameters:model.toJson()
+    //     // );
+    var uri = _host + "/api/auth/login/google?access_token=" + model.accessToken.toString();
     var response = await _dio.get(uri.toString());
     return BaseResponse(response.data["success"],response.data["msg"]);
 
