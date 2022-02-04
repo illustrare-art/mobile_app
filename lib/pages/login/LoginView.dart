@@ -46,8 +46,8 @@ class _LoginPageState extends State<LoginPage>{
   initState() {
     super.initState();
     Future.microtask(() async  {
-        AppUserModel user = await bloc.getUser();
-        this.redirect(user);
+      if(await bloc.isLoggedIn()) await bloc.getUser();
+
     });
   }
 

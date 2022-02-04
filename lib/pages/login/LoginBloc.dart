@@ -23,6 +23,10 @@ class LoginBloc {
 
   }
 
+  Future<bool> isLoggedIn() async{
+    return await UserManager.instance.isLoggedIn();
+  }
+
   dispose(){
     _subject.close();
   }
