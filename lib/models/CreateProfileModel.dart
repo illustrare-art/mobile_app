@@ -1,9 +1,9 @@
-import 'dart:ffi';
+import 'dart:typed_data';
 
 class CreateProfileModel {
-  String username;
-  String phoneNumber;
-  String photoUrl;
+  String? username;
+  String? phoneNumber;
+  List<int>? photoUrl;
 
   CreateProfileModel(this.username,  this.phoneNumber, this.photoUrl);
 
@@ -11,7 +11,7 @@ class CreateProfileModel {
     return <String, dynamic> {
       'username': username,
       'phone_number': phoneNumber,
-      'photo_url': photoUrl,
+      'profile_photo': photoUrl,
     };
   }
 // CreateProfileModel.withError(String s) {}

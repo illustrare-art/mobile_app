@@ -1,6 +1,4 @@
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:illustrare/auth/TokenManager.dart';
 import 'package:illustrare/auth/UserManager.dart';
