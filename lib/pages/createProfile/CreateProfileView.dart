@@ -40,7 +40,14 @@ class _CreateProfileState extends State<CreateProfile> {
   @override
   void initState() {
     super.initState();
-    bloc.getUser();
+    bloc
+        .getUser()
+        .then((user){
+          setState(() {
+            photoUrl = user.photoUrl;
+          });
+    });
+
   }
 
   Widget _buildScreen(String? errorMessage) {

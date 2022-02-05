@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:illustrare/auth/UserManager.dart';
 import 'package:illustrare/components/BaseBloc.dart';
@@ -34,7 +35,6 @@ class CreateProfileBloc extends BaseBloc {
 
   Future<AppUserModel> getUser() async {
     AppUserModel? user = await UserManager.instance.getUser();
-    photoUrl = user?.photoUrl;
     return user!;
   }
 

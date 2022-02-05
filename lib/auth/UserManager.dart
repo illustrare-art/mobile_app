@@ -22,6 +22,7 @@ class UserManager {
     }
   }
 
+
   Future<AppUserModel?> getUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if(_user != null) return _user!;

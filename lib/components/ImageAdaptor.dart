@@ -11,13 +11,16 @@ class ImageAdaptor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    if (imagePath.runtimeType is String) {
+    if (imagePath.runtimeType == String) {
       return Container(
           width: this.width,
           height: this.height,
           child: Image.network(
             this.imagePath,
+            width:this.width,
+            height:this.height,
+            fit: BoxFit.cover,
+
           ));
     } else if (imagePath is File) {
 
