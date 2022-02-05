@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:illustrare/auth/TokenManager.dart';
 import 'package:illustrare/auth/UserManager.dart';
+import 'package:illustrare/models/SinglePhotoModel.dart';
 import 'package:illustrare/models/TokenModel.dart';
 
 import '../models/CreateProfileModel.dart';
@@ -28,6 +30,19 @@ class IllustrareService{
     return "createProfile";
   }
 
+  String addSinglePhotoPath(){
+    return "addSinglePhoto";
+  }
+
+  Future<String> createJson(Map<String, dynamic> body) async {
+    var user = (await UserManager.instance.getUser())!;
+    var token = TokenManager.instance;
+    return jsonEncode({
+      "userToken": token,
+      "body": body});
+
+  }
+
   Future<BaseResponse> login(TokenModel model) async{
     /// Uri.http("example.org", "/path", { "q" : "dart" });
     // TODO: Update the code below on production.
@@ -50,15 +65,18 @@ class IllustrareService{
 
     var response = await _dio.postUri(
       uri,
-      data:jsonEncode({
-        "user_id":user.userId,
-        "username":model.username,
-        "profile_photo":user.photoUrl,
-        "phone_number":model.phoneNumber
-      })
+      data: createJson(model.toJson())
     );
+    return BaseResponse(response.data["success"],response.data["msg"]);
+  }
 
+  Future<BaseResponse> addSinglePhoto(SinglePhotoModel model) async {
+    var uri = Uri.http(_host,addSinglePhotoPath());
 
+    var response = await _dio.postUri(
+        uri,
+        data: createJson(model.toJson())
+    );
     return BaseResponse(response.data["success"],response.data["msg"]);
   }
 }

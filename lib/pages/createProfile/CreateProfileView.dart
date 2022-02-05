@@ -18,8 +18,6 @@ class CreateProfile extends StatefulWidget{
 class _CreateProfileState extends State<CreateProfile>{
 
   String? photoUrl;
-  final usernameController = TextEditingController();
-  final phoneNumberController = TextEditingController();
   String? errorMessage;
 
   @override
@@ -44,20 +42,7 @@ class _CreateProfileState extends State<CreateProfile>{
   @override
   void initState(){
     super.initState();
-    bloc
-        .getUser()
-        .then((user) {
-        if(user.photoUrl != null){
-            setState(() {
-              photoUrl = user.photoUrl;
-            });
-        }
-    });
-  }
-
-  static bool isUsernameValid(String username){
-    // TODO: Implement the rules.
-    return true;
+    bloc..getUser();
   }
 
   Widget _buildScreen(String? errorMessage) {
@@ -74,7 +59,7 @@ class _CreateProfileState extends State<CreateProfile>{
                 child:Center(
                     child:ClipRRect(
                       borderRadius: BorderRadius.circular(128),
-                      child:(photoUrl != null)  ? Image.network(photoUrl!,width:256,height:256,fit: BoxFit.cover)  : Placeholder(fallbackHeight: 256,fallbackWidth:256)
+                      child:(bloc.photoUrl != null)  ? Image.network(bloc.photoUrl!,width:256,height:256,fit: BoxFit.cover)  : Placeholder(fallbackHeight: 256,fallbackWidth:256)
             ))),
             Container(
               margin:EdgeInsets.only( top:16),
@@ -93,7 +78,9 @@ class _CreateProfileState extends State<CreateProfile>{
                 width:screenWidth*.9,
               child:TextField(
                 decoration: InputDecoration(labelText: 'Username'),
-                controller: usernameController,
+                onChanged: (text) {
+                  bloc.userName = text;
+                },
 
               )
             ),
@@ -102,7 +89,9 @@ class _CreateProfileState extends State<CreateProfile>{
                 width:screenWidth*.9,
                 child:TextField(
                   decoration: InputDecoration(labelText: 'Phone Number'),
-                  controller: phoneNumberController,
+                  onChanged: (text) {
+                    bloc.phoneNumber = text;
+                  },
                 )
             ),
             Container(
@@ -110,12 +99,7 @@ class _CreateProfileState extends State<CreateProfile>{
 
               child:TextButton(
                   onPressed: () async {
-                    var username = usernameController.text;
-                    if(!_CreateProfileState.isUsernameValid(username)){
-                      // TODO: side effect : Handle Error
-                    }else{
-                      await bloc.createProfile(CreateProfileModel(usernameController.text, phoneNumberController.text));
-                    }
+                      await bloc.onCreateProfileClicked();
                   },
                   style:TextButton.styleFrom(
                     backgroundColor: Color(0xFF00C89B),
