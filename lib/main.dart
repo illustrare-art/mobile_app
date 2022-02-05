@@ -4,6 +4,7 @@ import 'package:illustrare/pages/createProfile/CreateProfileView.dart';
 import 'package:illustrare/pages/feed/FeedView.dart';
 import 'pages/login/LoginView.dart';
 import 'package:illustrare/pages/UploadYourImage.dart';
+import 'package:illustrare/pages/addPhoto/AddPhotoView.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Illustrare',
       initialRoute: LoginPage.id,
       routes: {
+        AddPhotoView.id:(context) => AddPhotoView(),
         LoginPage.id: (context) => LoginPage(),
         UploadYourImage.id: (context) => UploadYourImage(),
         CreateProfile.id: (context) => CreateProfile(),

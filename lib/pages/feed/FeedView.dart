@@ -13,11 +13,14 @@ class FeedView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Color(0xFF292C6D),
+      bottomNavigationBar: BottomBar(),
       floatingActionButton: FloatingActionButton(
-      elevation: 4.0,
-      backgroundColor: Color(0xFF00C89B),
-      child:Icon(Icons.add,color:Color(0xFFF4ECFF) ),
-      onPressed: () {},
+        elevation: 4.0,
+        backgroundColor: Color(0xFF00C89B),
+        child:Icon(Icons.add,color:Color(0xFFF4ECFF) ),
+        onPressed: () {
+          Navigator.pushNamed(context, "/AddPhoto");
+        },
       ),
       floatingActionButtonLocation:
       FloatingActionButtonLocation.centerDocked,
@@ -38,7 +41,6 @@ class FeedView extends StatelessWidget {
             CollectionCard()
           ]
       ),
-      bottomNavigationBar: BottomBar(),
     );
   }
 }
