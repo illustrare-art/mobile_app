@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:illustrare/components/BottomBar.dart';
 import 'package:illustrare/components/CollectionCard.dart';
 
+import 'FeedItem.dart';
+
 class FeedView extends StatelessWidget {
   static String id = "/Feed";
 
@@ -26,19 +28,22 @@ class FeedView extends StatelessWidget {
       FloatingActionButtonLocation.centerDocked,
       body: Column(
 
+        // TODO: Example usage.
           children:[
-            Container(
-                margin: EdgeInsets.only(top: screenHeight/10),
-                child: const Text(
-                    'Collections',
-                    textAlign: TextAlign.left,
-                    style:TextStyle(
-                        color:Color(0xFFFFFFFF),
-                        fontSize:48
-                    )
-                )
+            FeedItem(
+              "1",
+              "ovuruska",
+              "https://ovuruska-nft.s3.amazonaws.com/image_773.png",
+              1000000,
+              1000
             ),
-            CollectionCard()
+            FeedItem(
+                "1",
+                "ovuruska",
+                "https://gateway.pinata.cloud/ipfs/QmfJF7KQx67uM5NxWx8uCZgAKhBdVWHTedrxr35nEzFWRH",
+                1500,
+                55
+            )
           ]
       ),
     );

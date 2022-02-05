@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Illustrare',
-      initialRoute: LoginPage.id,
+      initialRoute: FeedView.id,
       routes: {
         AddPhotoView.id:(context) => AddPhotoView(),
         LoginPage.id: (context) => LoginPage(),
