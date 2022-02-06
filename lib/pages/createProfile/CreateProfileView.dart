@@ -3,6 +3,7 @@ import 'package:illustrare/components/ImageAdaptor.dart';
 import 'package:illustrare/constants.dart';
 import 'package:illustrare/models/StreamListenableBuilder.dart';
 import 'package:illustrare/network/BaseResponse.dart';
+import 'package:illustrare/pages/createProfile/ValidationMixin.dart';
 
 import "./CreateProfileBloc.dart";
 
@@ -13,7 +14,7 @@ class CreateProfile extends StatefulWidget {
   _CreateProfileState createState() => _CreateProfileState();
 }
 
-class _CreateProfileState extends State<CreateProfile> {
+class _CreateProfileState extends State<CreateProfile> with ValidationMixin {
   var photoUrl;
   final formKey = GlobalKey<FormState>();
 
@@ -84,13 +85,7 @@ class _CreateProfileState extends State<CreateProfile> {
                     margin: EdgeInsets.only(top: 48),
                     width: screenWidth * .9,
                     child: TextFormField(
-                      validator: (value){
-                        if(value == null) return "Username cannot be empty.";
-                        final alphanumeric = RegExp(r'^[a-zA-Z0-9_\-]{1,32}$');
-
-                        if(alphanumeric.hasMatch(value)) return null;
-                        else return "Username can only contain uppercase, lowercase characters, hyphens, underscores and digits.";
-                      },
+                      validator: validateUsername,
                       onSaved:(value){
                         bloc.userName = value;
                       },
