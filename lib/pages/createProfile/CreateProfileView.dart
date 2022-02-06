@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:illustrare/components/ImageAdaptor.dart';
+import 'package:illustrare/constants.dart';
 import 'package:illustrare/models/StreamListenableBuilder.dart';
 import 'package:illustrare/network/BaseResponse.dart';
 
@@ -14,7 +15,7 @@ class CreateProfile extends StatefulWidget {
 
 class _CreateProfileState extends State<CreateProfile> {
   var photoUrl;
-  String? errorMessage;
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,26 +32,23 @@ class _CreateProfileState extends State<CreateProfile> {
         },
         builder: (context, AsyncSnapshot<BaseResponse> snapshot) {
           if (snapshot.data != null)
-            return _buildScreen(snapshot.data!.message);
+            return _buildScreen();
           else
-            return _buildScreen(null);
+            return _buildScreen();
         });
   }
 
   @override
   void initState() {
     super.initState();
-    bloc
-        .getUser()
-        .then((user){
-          setState(() {
-            photoUrl = user.photoUrl;
-          });
+    bloc.getUser().then((user) {
+      setState(() {
+        photoUrl = user.photoUrl;
+      });
     });
-
   }
 
-  Widget _buildScreen(String? errorMessage) {
+  Widget _buildScreen() {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Color(0xFFF4ECFF),
@@ -68,51 +66,58 @@ class _CreateProfileState extends State<CreateProfile> {
                 this.setState(() {
                   photoUrl = image;
                 });
-
               },
               child: Container(
                   margin: EdgeInsets.only(top: 16),
                   child: RichText(
                       text: TextSpan(
-                    text: "Edit Your Profile Photo",
+                    text: "Change your profile photo",
                     style: TextStyle(
                         color: Color(0xFF00C89B),
                         fontSize: 16,
                         fontWeight: FontWeight.w700),
                   )))),
-          Container(
-              margin: EdgeInsets.only(top: 48),
-              width: screenWidth * .9,
-              child: TextField(
-                decoration: InputDecoration(labelText: 'Username'),
-                onChanged: (text) {
-                  bloc.userName = text;
-                },
-              )),
-          Container(
-              margin: EdgeInsets.only(top: 32),
-              width: screenWidth * .9,
-              child: TextField(
-                decoration: InputDecoration(labelText: 'Phone Number'),
-                onChanged: (text) {
-                  bloc.phoneNumber = text;
-                },
-              )),
-          Container(
-              margin: EdgeInsets.only(top: 32),
-              child: TextButton(
-                  onPressed: () async {
-                    await bloc.onCreateProfileClicked();
-                  },
-                  style: TextButton.styleFrom(
-                      backgroundColor: Color(0xFF00C89B),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      )),
-                  child: Text("Start",
-                      style: TextStyle(fontSize: 32, color: Colors.white))))
+          Form(
+              key: formKey,
+              child: Column(children: [
+                Container(
+                    margin: EdgeInsets.only(top: 48),
+                    width: screenWidth * .9,
+                    child: TextFormField(
+                      validator: (value){
+                        if(value == null) return "Username cannot be empty.";
+                        final alphanumeric = RegExp(r'^[a-zA-Z0-9_\-]{1,32}$');
+
+                        if(alphanumeric.hasMatch(value)) return null;
+                        else return "Username can only contain uppercase, lowercase characters, hyphens, underscores and digits.";
+                      },
+                      onSaved:(value){
+                        bloc.userName = value;
+                      },
+                      decoration: InputDecoration(labelText: 'Username',iconColor:GREEN_BUTTON_COLOR,hintText: "your_username"),
+                    )),
+
+                Container(
+                    margin: EdgeInsets.only(top: 32),
+                    child: TextButton(
+                        onPressed: () async {
+                          if(formKey.currentState!.validate()){
+                            formKey.currentState!.save();
+                            formKey.currentState!.reset();
+                            bloc.onCreateProfileClicked();
+                          }
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: Color(0xFF00C89B),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 32, vertical: 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            )),
+                        child: Text("Start",
+                            style:
+                                TextStyle(fontSize: 32, color: Colors.white))))
+              ]))
         ]));
   }
 }
