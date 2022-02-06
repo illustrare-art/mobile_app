@@ -86,17 +86,19 @@ class _CreateProfileState extends State<CreateProfile> with ValidationMixin {
                     width: screenWidth * .9,
                     child: TextFormField(
                       validator: validateUsername,
-                      onSaved:(value){
+                      onSaved: (value) {
                         bloc.userName = value;
                       },
-                      decoration: InputDecoration(labelText: 'Username',iconColor:GREEN_BUTTON_COLOR,hintText: "your_username"),
+                      decoration: InputDecoration(
+                          labelText: 'Username',
+                          iconColor: GREEN_BUTTON_COLOR,
+                          hintText: "your_username"),
                     )),
-
                 Container(
                     margin: EdgeInsets.only(top: 32),
                     child: TextButton(
                         onPressed: () async {
-                          if(formKey.currentState!.validate()){
+                          if (formKey.currentState!.validate()) {
                             formKey.currentState!.save();
                             formKey.currentState!.reset();
                             bloc.onCreateProfileClicked();
