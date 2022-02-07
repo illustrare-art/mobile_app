@@ -33,9 +33,9 @@ class CreateProfileBloc extends BaseBloc {
     _subject.sink.add(response);
   }
 
-  Future<AppUserModel> getUser() async {
+  Future<AppUserModel?> getUser() async {
     AppUserModel? user = await UserManager.instance.getUser();
-    return user!;
+    return user;
   }
 
   dispose() {

@@ -13,26 +13,25 @@ import "package:cookie_jar/cookie_jar.dart";
 
 class IllustrareService {
   // TODO: change parameters on deployment.
-  final String _host = "http://204f-24-133-86-35.ngrok.io";
+  final String _host = "http://6b23-24-133-86-35.ngrok.io";
+  static CookieManager _cj = CookieManager(CookieJar());
 
-  final CookieJar cj = CookieJar();
 
-  final Dio _dio = Dio(BaseOptions(headers: {
-    'Connection': 'keep-alive',
-    'Accept': "*/*",
-    "Content-Type": "application/json"
-  }));
 
-  IllustrareService(){
-    _dio.interceptors.add(CookieManager(cj));
+  getDio(){
+    Dio dio = Dio();
+    dio.interceptors.add(_cj);
+    return dio;
   }
 
+
+
   String loginPath() {
-    return "api/auth/login/google";
+    return "/api/auth/login/google";
   }
 
   String initUserPath() {
-    return "api/users/init";
+    return "/api/users/init";
   }
 
   String addSinglePhotoPath() {
@@ -46,9 +45,11 @@ class IllustrareService {
 
   Future<BaseResponse> login(TokenModel model) async {
     var uri = _host +
-        "/api/auth/login/google?access_token=" +
+        loginPath() + "?access_token=" +
         model.accessToken.toString();
-    var response = await _dio.get(uri.toString());
+
+    var response = await getDio().get(uri.toString());
+    print(response.headers);
     return BaseResponse(response.data["success"], response.data["msg"]);
   }
 
@@ -56,16 +57,22 @@ class IllustrareService {
 
     var uri = Uri.parse(_host + initUserPath());
 
-    var response = await _dio.postUri(uri,
-        data: createJson(model.toJson()),
+    var response = await getDio().postUri(uri,
+      data: model.toJson(),
+      options:Options(
+        headers: {
+          "Authorization":  (await TokenManager.instance.getToken())!.idToken
+        }
+      )
     );
+
     return BaseResponse(response.data["success"], response.data["msg"]);
   }
 
   Future<BaseResponse> addSinglePhoto(SinglePhotoModel model) async {
     var uri = Uri.http(_host, addSinglePhotoPath());
 
-    var response = await _dio.postUri(uri, data: createJson(model.toJson()));
+    var response = await getDio().postUri(uri, data: createJson(model.toJson()));
     return BaseResponse(response.data["success"], response.data["msg"]);
   }
 }

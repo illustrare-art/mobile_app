@@ -24,11 +24,10 @@ class TokenManager {
 
   Future<void> setToken(TokenModel token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (token != null){
-      _token = token;
-      prefs.setString("TOKEN_ACCESS_TOKEN",token.accessToken);
+    _token = token;
+    prefs.setString("TOKEN_ACCESS_TOKEN",token.accessToken);
+    prefs.setString("TOKEN_ID_TOKEN",token.idToken);
 
-    }
   }
 
   bool isLoggedIn(){
@@ -41,8 +40,9 @@ class TokenManager {
     else{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? accessToken = prefs.getString("TOKEN_ACCESS_TOKEN");
-      if(accessToken == null) return null;
-      else return TokenModel(accessToken);
+      String? idToken = prefs.getString("TOKEN_ID_TOKEN");
+      if(accessToken == null || idToken == null) return null;
+      else return TokenModel(accessToken:accessToken,idToken:idToken);
     }
   }
 

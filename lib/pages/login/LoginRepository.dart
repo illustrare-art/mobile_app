@@ -23,7 +23,7 @@ class LoginRepository{
     User? user = FirebaseAuth.instance.currentUser;
     if(user != null) UserManager.instance.setUser(AppUserModel(user.uid,null,user.photoURL,user.phoneNumber,user.email));
 
-    var model = TokenModel(credential.accessToken!);
+    var model = TokenModel(accessToken:credential.accessToken!,idToken:credential.idToken!);
     var response = await _illustrareService.login(model);
 
     if(response.success){

@@ -44,7 +44,10 @@ class _CreateProfileState extends State<CreateProfile> with ValidationMixin {
     super.initState();
     bloc.getUser().then((user) {
       setState(() {
-        photoUrl = user.photoUrl;
+        if(user != null){
+          photoUrl = user.photoUrl;
+
+        }
       });
     });
   }
