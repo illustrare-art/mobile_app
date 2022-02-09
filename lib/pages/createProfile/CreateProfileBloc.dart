@@ -46,6 +46,7 @@ class CreateProfileBloc extends BaseBloc {
 
   onCreateProfileClicked() async {
     var photo = await _fetchPhoto();
+
     var model = CreateProfileModel(username:userName, photo:photo);
     _createProfile(model);
   }
@@ -61,18 +62,19 @@ class CreateProfileBloc extends BaseBloc {
 
   Future<File?> _fetchPhoto() async {
     File imageFile;
-    if (photoUrl.runtimeType is File) {
+    if (photoUrl.runtimeType is File || photoUrl.runtimeType.toString() == "_File") {
       imageFile = photoUrl;
     } else if (photoUrl.runtimeType == String) {
       final response = await http.get(Uri.parse(photoUrl));
       final documentDirectory = await getApplicationDocumentsDirectory();
 
       imageFile = File(p.join(documentDirectory.path, "image.png"));
-      imageFile.writeAsBytes(response.bodyBytes);
-    } else {
-     return null;
-    }
+      photoUrl = await imageFile.writeAsBytes(response.bodyBytes);
 
+    } else {
+
+      return null;
+    }
     return imageFile;
   }
 }

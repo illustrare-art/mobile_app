@@ -27,7 +27,6 @@ class _CreateProfileState extends State<CreateProfile> with ValidationMixin {
             if (value.success) {
               Navigator.popAndPushNamed(context, "/Feed");
             } else {
-              // TODO: Handle Error
             }
           }
         },

@@ -49,20 +49,19 @@ class IllustrareService {
         _host + loginPath() + "?access_token=" + model.accessToken.toString();
 
     var response = await getDio().get(uri.toString());
-    print(response.headers);
     return BaseResponse(response.data["success"], response.data["msg"]);
   }
 
   Future<BaseResponse> createProfile(CreateProfileModel model) async {
     var uri = Uri.parse(_host + initUserPath());
 
-    var requestBody = model.toJson();
-
+    var requestBody = await model.toJson();
     var response = await getDio().postUri(uri,
         data: requestBody,
         options: Options(headers: {
           "Authorization": (await TokenManager.instance.getToken())!.idToken
         }));
+
 
     return BaseResponse(response.data["success"], response.data["msg"]);
   }
