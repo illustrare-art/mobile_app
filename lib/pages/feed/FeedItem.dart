@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:illustrare/constants.dart';
-import 'package:path/path.dart' as p;
 
 class ItemHeader extends StatelessWidget {
   int views;

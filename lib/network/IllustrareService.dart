@@ -1,30 +1,31 @@
 import 'dart:convert';
 
+import "package:cookie_jar/cookie_jar.dart";
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import "package:dio_cookie_manager/dio_cookie_manager.dart";
 import 'package:illustrare/auth/TokenManager.dart';
 import 'package:illustrare/models/SinglePhotoModel.dart';
 import 'package:illustrare/models/TokenModel.dart';
 import 'package:illustrare/network/BaseResponse.dart';
 
 import '../models/CreateProfileModel.dart';
-import "package:dio_cookie_manager/dio_cookie_manager.dart";
-import "package:cookie_jar/cookie_jar.dart";
 
 class IllustrareService {
+  static IllustrareService? _instance;
+
+  IllustrareService._();
+
+  static IllustrareService get instance => _instance ??= IllustrareService._();
+
   // TODO: change parameters on deployment.
-  final String _host = "http://6b23-24-133-86-35.ngrok.io";
+  final String _host = "http://e537-24-133-86-35.ngrok.io";
   static CookieManager _cj = CookieManager(CookieJar());
 
-
-
-  getDio(){
+  getDio() {
     Dio dio = Dio();
     dio.interceptors.add(_cj);
     return dio;
   }
-
-
 
   String loginPath() {
     return "/api/auth/login/google";
@@ -44,9 +45,8 @@ class IllustrareService {
   }
 
   Future<BaseResponse> login(TokenModel model) async {
-    var uri = _host +
-        loginPath() + "?access_token=" +
-        model.accessToken.toString();
+    var uri =
+        _host + loginPath() + "?access_token=" + model.accessToken.toString();
 
     var response = await getDio().get(uri.toString());
     print(response.headers);
@@ -54,17 +54,15 @@ class IllustrareService {
   }
 
   Future<BaseResponse> createProfile(CreateProfileModel model) async {
-
     var uri = Uri.parse(_host + initUserPath());
 
+    var requestBody = model.toJson();
+
     var response = await getDio().postUri(uri,
-      data: model.toJson(),
-      options:Options(
-        headers: {
-          "Authorization":  (await TokenManager.instance.getToken())!.idToken
-        }
-      )
-    );
+        data: requestBody,
+        options: Options(headers: {
+          "Authorization": (await TokenManager.instance.getToken())!.idToken
+        }));
 
     return BaseResponse(response.data["success"], response.data["msg"]);
   }
@@ -72,7 +70,8 @@ class IllustrareService {
   Future<BaseResponse> addSinglePhoto(SinglePhotoModel model) async {
     var uri = Uri.http(_host, addSinglePhotoPath());
 
-    var response = await getDio().postUri(uri, data: createJson(model.toJson()));
+    var response =
+        await getDio().postUri(uri, data: createJson(model.toJson()));
     return BaseResponse(response.data["success"], response.data["msg"]);
   }
 }

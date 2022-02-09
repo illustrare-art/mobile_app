@@ -7,8 +7,8 @@ import 'package:illustrare/network/GoogleSignInService.dart';
 import 'package:illustrare/network/IllustrareService.dart';
 
 class LoginRepository{
-  GoogleSignInService _googleSignIn = GoogleSignInService();
-  IllustrareService _illustrareService = IllustrareService();
+  GoogleSignInService _googleSignIn = GoogleSignInService.instance;
+  IllustrareService _illustrareService = IllustrareService.instance;
 
   AppUserModel? getUser(){
 
