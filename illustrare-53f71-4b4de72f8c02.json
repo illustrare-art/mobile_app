@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "illustrare-53f71",
+  "private_key_id": "370f31eb5286f70b80ec2c985e101340410f8ffe",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDPndvxp1Iwh6s1\n/xuBqmmWMlcEfl4fCn0pjSy1eh2Qm+SGeeeVgKugfcO2jpI6oHipqc4vCvXf+VdI\nktHT+sIhOoe1tMv+IQQ27JwsMqV/hoeKgTA32OluH/910t4qa6XIS1GST1WbZpPV\n3RT62trx2OrlqPe8xu+lt8L+zwfl2kv99cwN7M+4v0mVGwyyTqNMwImDKMK0AoQr\nJXqtN2SZvGRpCLcglrzr4bcTm/qgXxnBVULIX0PLEn/decQGM0iez3sb1sS6N8+q\nDfoNeRbQwX4Wt12lCO/Ado7LtbUt5gVI3dvVGQX0EE6iBZbphQcXcRlbA+ZQbm0R\nvtdap5EdAgMBAAECggEASRuf1wzh2rfzWJy/7V16N8r7LFhpQUn6v/Z372GUZpcW\nlin4HAOGrAmNMMwsftuCEdB7C8KyyQ8upp4YqCoNUREgt6H2EUNEDiksZz3gXDMd\nqG6McaX+sOowlSdPVyW353tqOniYPxQUa8Mhf6IwZehJ8twYfI+a1MKMNhjmAZBF\n8534z9AI+ZoGNeFvPim33J+QCxRA+PXJg1ed2f44uC81LHLHlWgQ3bZ5zv0fp+ND\naExq6q4gh9jZEFS1wSrPAmvIonj/gl4Q40+mcNXZsP5qOUnmYYO3x0jMyCk2IELU\nuWboF0OeMfV4G7NjtAto7fkX0zH+vjSw31Hd5YxkiwKBgQD1U+muxKaqCt6hmYN1\njM8pP7HWmoYCAFn4Vs9bnArOV+0+fZSW5WRxqfL6E19YUK06XL51gJuE5NPn5WXx\naPf2tPnhzUdcGQQANrybXlgpr4uRjzP2ZgNf6D8a2+F5CgMb7lO3/6nf5uXeabFX\ncd1aJlehTxG47GzgvVLjEXv/gwKBgQDYpfod4GV7XEbs1qO6+0RiPz+wgtTcCF+I\nMe1VjhHwZnj3vj/7jjcZi+Wz567hOyJ92dsPhBDlQ9fwgZyVHwZ7Vn+qdwmLIAMG\nm0N2QF9QNvJA/sMkYjxMHazHITALHV6jWpljMJg3MHkgTy+1XXlfmMVRumF5gOBf\nnnzE132q3wKBgQCXk10SqlX/QfAEEIF0o6draPtMCPU7T1RHZ/t+Mo9KpnDi51xj\nTyAcSlDhyg5i1pXxNVRH7Uopdeinosi1u5FZUMADj33DnYEnUKp/pG78coXdTYlh\nd+4l160Fv000J8d7/mijisc+m77zCIKV8Lg+9um1tNDSXOF4igEoYqkmWQKBgFb1\n+Hl5kwJ7PbTfSwVIymAtRyFQwqQ3cDE46S0IQ8cdOr0mzoPox9EnSGJ4QsgBdozR\nn46Q0j9Uhh7xx6pLs8xaIhCIi3oetVg3hlK28AtAoujX2fiGvfFHkAy2E5TCizRC\nr4MTBGZSvKvtXRcNmCR5K+rsRygARQ/ci/RvEvA9AoGAcUKlMJIaeDgXMJC7loxP\nAmCNz4RoqoppFkQb8Gc5v1irWF9785Fu08D3AWFBxTswYXeHwsPkH0scpb3q11Pm\nvOWXVG3iK9Rbc4+c+vJmViGHGanjYrS7kW2HgvvIJnI4oUlYmc9EW2DbXCUFlm7g\neCnHqvEUPPSd+y+29Hj16eY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "flutter-client@illustrare-53f71.iam.gserviceaccount.com",
+  "client_id": "103115775205806131486",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/flutter-client%40illustrare-53f71.iam.gserviceaccount.com"
+}

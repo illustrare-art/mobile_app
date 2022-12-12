@@ -1,14 +1,21 @@
 import 'dart:ffi';
 
 class BaseResponse {
-  final Bool success;
-  final String message;
+  final bool success;
+  final String? message;
 
   BaseResponse(this.success, this.message);
 
-  BaseResponse.fromJson(Map<String, dynamic> json)
-      : success = json["success"],
-        message = json["message"];
+  @override
+  String toString() {
+    var responseMap = {
+      "success":success,
+      "message":message
+    };
+    return responseMap.toString();
+  }
 
-  static Future<BaseResponse> withError(String s) {}
+  // BaseResponse.withError(String errorValue)
+  //     : results = List(),
+  //       error = errorValue;
 }
